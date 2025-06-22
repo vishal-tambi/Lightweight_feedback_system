@@ -19,7 +19,7 @@ app = FastAPI(title="Feedback System API", version="1.0.0")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://lightweight-feedback-system.vercel.app/"],  # React dev server
+    allow_origins=["https://lightweight-feedback-system.vercel.app"],  # React dev server
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
