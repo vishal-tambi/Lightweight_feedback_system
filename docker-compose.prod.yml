@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: feedback-mongodb-prod
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-password}
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - feedback-network
+
+  backend:
+    build: ./backend
+    container_name: feedback-backend-prod
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URI: ${MONGODB_URI:-mongodb://admin:password@mongodb:27017/}
+      SECRET_KEY: ${SECRET_KEY:-your-super-secret-key-change-this-in-production}
+    depends_on:
+      - mongodb
+    networks:
+      - feedback-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: feedback-frontend-prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - feedback-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  feedback-network:
+    driver: bridge 
