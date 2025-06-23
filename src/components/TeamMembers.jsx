@@ -19,6 +19,7 @@ const TeamMembers = () => {
       const response = await axios.get('/users/team')
       setTeamMembers(response.data)
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load team members')
     } finally {
       setLoading(false)

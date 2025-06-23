@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { 
-  BarChart3, 
-  Users, 
-  MessageSquare, 
-  Plus, 
-  LogOut, 
-  TrendingUp, 
+import {
+  BarChart3,
+  Users,
+  MessageSquare,
+  Plus,
+  LogOut,
+  TrendingUp,
   CheckCircle,
   Clock,
   User,
@@ -30,13 +30,17 @@ const Dashboard = () => {
       const response = await axios.get('/dashboard/stats')
       setStats(response.data)
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load dashboard stats')
     } finally {
       setLoading(false)
     }
   }
 
-  const StatCard = ({ title, value, icon: Icon, color = 'blue' }) => (
+  const StatCard = ({ title,
+    value,
+    icon: Icon, //eslint-disable-line no-unused-vars
+    color = 'blue' }) => (
     <div className={`bg-white p-6 rounded-lg shadow-md border-l-4 border-${color}-500`}>
       <div className="flex items-center">
         <div className={`p-2 rounded-full bg-${color}-100`}>
@@ -50,7 +54,8 @@ const Dashboard = () => {
     </div>
   )
 
-  const QuickAction = ({ title, description, icon: Icon, href, color = 'indigo' }) => (
+  const QuickAction = ({ title, description, icon: Icon, //eslint-disable-line no-unused-vars
+    href, color = 'indigo' }) => (
     <Link
       to={href}
       className={`block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border-l-4 border-${color}-500`}
@@ -92,11 +97,10 @@ const Dashboard = () => {
               <div className="flex items-center space-x-2">
                 <User className="h-5 w-5 text-gray-400" />
                 <span className="text-sm text-gray-700">{user?.username}</span>
-                <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                  user?.role === 'manager' 
-                    ? 'bg-purple-100 text-purple-800' 
+                <span className={`px-2 py-1 text-xs font-medium rounded-full ${user?.role === 'manager'
+                    ? 'bg-purple-100 text-purple-800'
                     : 'bg-blue-100 text-blue-800'
-                }`}>
+                  }`}>
                   {user?.role}
                 </span>
               </div>
@@ -119,7 +123,7 @@ const Dashboard = () => {
             Welcome back, {user?.username}!
           </h2>
           <p className="mt-2 text-gray-600">
-            {user?.role === 'manager' 
+            {user?.role === 'manager'
               ? 'Manage your team feedback and track performance'
               : 'View your feedback and track your progress'
             }
