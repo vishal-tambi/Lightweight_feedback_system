@@ -99,7 +99,7 @@ function App() {
             />
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Routes>
-        </div>
+      </div>
       </Router>
     </AuthProvider>
   )
