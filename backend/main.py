@@ -43,6 +43,7 @@ class UserCreate(BaseModel):
     role: str  # "manager" or "employee"
     manager_id: Optional[str] = None
 
+
 class UserLogin(BaseModel):
     username: str
     password: str
