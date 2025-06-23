@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { ArrowLeft, Send, Users } from 'lucide-react'
 
 const CreateFeedback = () => {
-  const { user } = useAuth()
+  const { user: _user } = useAuth()
   const navigate = useNavigate()
   const [teamMembers, setTeamMembers] = useState([])
   const [loading, setLoading] = useState(true)
@@ -27,6 +27,7 @@ const CreateFeedback = () => {
       const response = await axios.get('/users/team')
       setTeamMembers(response.data)
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load team members')
     } finally {
       setLoading(false)

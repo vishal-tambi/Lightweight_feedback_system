@@ -17,15 +17,19 @@ import {
 } from 'lucide-react'
 
 const Dashboard = () => {
-  const { user, logout } = useAuth()
+  const { user, token, logout } = useAuth()
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchStats()
-  }, [])
+    if (user && token) {
+      fetchStats()
+    }
+    // eslint-disable-next-line
+  }, [user, token])
 
   const fetchStats = async () => {
+    if (!user || !token) return;
     try {
       const response = await axios.get('/dashboard/stats')
       setStats(response.data)
@@ -37,9 +41,7 @@ const Dashboard = () => {
     }
   }
 
-  const StatCard = ({ title,
-    value,
-    icon: Icon, //eslint-disable-line no-unused-vars
+  const StatCard = ({ title, value, icon: Icon, // eslint-disable-line no-unused-vars
     color = 'blue' }) => (
     <div className={`bg-white p-6 rounded-lg shadow-md border-l-4 border-${color}-500`}>
       <div className="flex items-center">
@@ -54,7 +56,7 @@ const Dashboard = () => {
     </div>
   )
 
-  const QuickAction = ({ title, description, icon: Icon, //eslint-disable-line no-unused-vars
+  const QuickAction = ({ title, description, icon: Icon, // eslint-disable-line no-unused-vars
     href, color = 'indigo' }) => (
     <Link
       to={href}
