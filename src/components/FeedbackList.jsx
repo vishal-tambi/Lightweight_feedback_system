@@ -32,6 +32,7 @@ const FeedbackList = () => {
       const response = await axios.get('/feedback')
       setFeedback(response.data)
     } catch (error) {
+      console.error(error);
       toast.error('Failed to load feedback')
     } finally {
       setLoading(false)
@@ -44,6 +45,7 @@ const FeedbackList = () => {
       toast.success('Feedback acknowledged')
       fetchFeedback()
     } catch (error) {
+      console.error(error);
       toast.error('Failed to acknowledge feedback')
     }
   }
@@ -56,6 +58,7 @@ const FeedbackList = () => {
       setEditForm({})
       fetchFeedback()
     } catch (error) {
+      console.error(error);
       toast.error('Failed to update feedback')
     }
   }

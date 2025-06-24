@@ -1,0 +1,23 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /feedback/
+Disallow: /team/
+Disallow: /login
+Disallow: /register
+Disallow: /backend/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+
+# Allow access to legal pages
+Allow: /privacy-policy.html
+Allow: /terms-of-service.html
+Allow: /copyright-notice.html
+
+# Sitemap (if you have one)
+# Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay to prevent overwhelming the server
+Crawl-delay: 10 
