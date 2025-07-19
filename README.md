@@ -132,7 +132,6 @@ docker run -p 8000:8000 feedback-backend
 MONGODB_URI=mongodb://localhost:27017/
 SECRET_KEY=your-super-secret-key-change-this-in-production
 ```
-
 ## 🔧 API Endpoints
 
 ### Authentication
